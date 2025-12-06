@@ -1,5 +1,7 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { UsersService } from './users.service';
+import { Body } from '@nestjs/common';
+import { CreateUserDto } from './dto';
 
 @Controller('users')
 export class UsersController {
@@ -13,4 +15,10 @@ export class UsersController {
   ) {
     return this.usersService.findEvents(Number(id), from, to);
   }
+
+    @Post()
+    async create(@Body() createUser: CreateUserDto) {
+      return this.usersService.create(createUser);
+    }
+
 }
